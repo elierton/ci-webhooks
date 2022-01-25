@@ -4,7 +4,11 @@ set -e
 
 FAILURE=1
 SUCCESS=0
+
+WEBHOOK_URL=${WEBHOOK_URL}
+
 ENVIRONMENT=${CI_COMMIT_BRANCH}
+
 
 function print_slack_summary_build() {
         local slack_msg_header
@@ -68,5 +72,5 @@ function send_update_build() {
         
    curl -X POST                                           \
        --data-urlencode "payload=$(print_slack_summary_build)"  \
-        "${$WEBHOOK_URL}"
+        "${slack_webhook}"
 }
