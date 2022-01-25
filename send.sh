@@ -6,18 +6,18 @@ FAILURE=1
 SUCCESS=0
 ENVIRONMENT: ${CI_COMMIT_BRANCH}
 
-SLACK_WEBHOOK=${WEBHOOK_URL}
+SLACK_WEBHOOK=${SLACK_WEBHOOK}
 
 function print_slack_summary_build() {
         local slack_msg_header
         local slack_msg_body
-        local slack_channel
+        
 
 # Populate header and define slack channels
 slack_msg_header=":x: *Build to ${ENVIRONMENT} failed*"
 if [[ "${EXIT_STATUS}" == "${SUCCESS}" ]]; then
         slack_msg_header=":heavy_check_mark: *Build to ${ENVIRONMENT} succeeded*"
-        slack_channel="$SLACK_CHANNEL"
+        
     fi
 cat <<-SLACK
             {
@@ -71,5 +71,5 @@ function send_slack_update_build() {
         
    curl -X POST                                           \
        --data-urlencode "payload=$(print_slack_summary_build)"  \
-        "${WEBHOOK_URL}"
+        "${SLACK_WEBHOOK}"
 }
