@@ -2,6 +2,8 @@
 set -x
 set -e
 
+WEBHOOK_URL=${WEBHOOK_URL}
+
 case $1 in
   "success" )
     EMBED_COLOR=3066993
