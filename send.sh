@@ -9,18 +9,6 @@ case $1 in
     STATUS_MESSAGE="Passed"
     ARTIFACT_URL="$CI_JOB_URL/artifacts/download"
     ;;
-
-  "failure" )
-    EMBED_COLOR=15158332
-    STATUS_MESSAGE="Failed"
-    ARTIFACT_URL="Not available"
-    ;;
-
-  * )
-    EMBED_COLOR=0
-    STATUS_MESSAGE="Status Unknown"
-    ARTIFACT_URL="Not available"
-    ;;
 esac
 
 shift
@@ -65,13 +53,13 @@ if [ -z $LINK_ARTIFACT ] || [ $LINK_ARTIFACT = false ] ; then
       "description": "'"${COMMIT_MESSAGE//$'\n'/ }"\\n\\n"$CREDITS"'",
       "fields": [
         {
-          "name": "Commit",
-          "value": "'"[\`$CI_COMMIT_SHORT_SHA\`]($CI_PROJECT_URL/commit/$CI_COMMIT_SHA)"'",
+          "name": "Branch",
+          "value": "'"[\`$CI_COMMIT_REF_NAME\`]($CI_PROJECT_URL/tree/$CI_COMMIT_REF_NAME)"'",
           "inline": true
         },
         {
-          "name": "Branch",
-          "value": "'"[\`$CI_COMMIT_REF_NAME\`]($CI_PROJECT_URL/tree/$CI_COMMIT_REF_NAME)"'",
+          "name": "Commit",
+          "value": "'"[\`$CI_COMMIT_SHORT_SHA\`]($CI_PROJECT_URL/commit/$CI_COMMIT_SHA)"'",
           "inline": true
         }
         ],
