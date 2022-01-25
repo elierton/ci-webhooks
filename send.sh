@@ -50,75 +50,68 @@ fi
 TIMESTAMP=$(date --utc +%FT%TZ)
 
 if [ -z $LINK_ARTIFACT ] || [ $LINK_ARTIFACT = false ] ; then
-  WEBHOOK_DATA= '{
-  "fallback": "Required text summary of the attachment that is shown by clients that understand attachments but choose not to show them.",
-	
-	 "color": "#36a64f",
-	
-   "fields": [
-     {
-          "name": "username",
-          "value": "${GITLAB_USER_NAME}",
-          "inline": true
-        },
-			 {
-          "name": "url",
-          "value": "$URL",
+  WEBHOOK_DATA='{
+    "username": "",
+    "avatar_url": "https://gitlab.com/favicon.png",
+    "embeds": [ {
+      "color": '$EMBED_COLOR',
+      "author": {
+        "name": "Pipeline #'"$CI_PIPELINE_IID"' '"$STATUS_MESSAGE"' - '"$CI_PROJECT_PATH_SLUG"'",
+        "url": "'"$CI_PIPELINE_URL"'",
+        "icon_url": "https://gitlab.com/favicon.png"
+      },
+      "title": "'"$COMMIT_SUBJECT"'",
+      "url": "'"$URL"'",
+      "description": "'"${COMMIT_MESSAGE//$'\n'/ }"\\n\\n"$CREDITS"'",
+      "fields": [
+        {
+          "name": "Commit",
+          "value": "'"[\`$CI_COMMIT_SHORT_SHA\`]($CI_PROJECT_URL/commit/$CI_COMMIT_SHA)"'",
           "inline": true
         },
         {
           "name": "Branch",
-          "value": "$CI_COMMIT_REF_NAME",
+          "value": "'"[\`$CI_COMMIT_REF_NAME\`]($CI_PROJECT_URL/tree/$CI_COMMIT_REF_NAME)"'",
           "inline": true
-        },
-		 		{
-          "name": "Commit",
-          "value": "$CI_COMMIT_SHORT_SHA",
-          "inline": true
-        },
-		 		{
-          "name": "timestamp",
-          "value": "$TIMESTAMP",
-          "inline": false
         }
-        
-   ]
-}'
+        ],
+        "timestamp": "'"$TIMESTAMP"'"
+      } ]
+    }'
 else
 	WEBHOOK_DATA='{
-  "fallback": "Required text summary of the attachment that is shown by clients that understand attachments but choose not to show them.",
-	
-	 "color": "#36a64f",
-	
-   "fields": [
-     {
-          "name": "username",
-          "value": "${GITLAB_USER_NAME}",
-          "inline": true
-        },
-			 {
-          "name": "url",
-          "value": "$URL",
-          "inline": true
-        },
-        {
-          "name": "Branch",
-          "value": "$CI_COMMIT_REF_NAME",
-          "inline": true
-        },
-		 		{
-          "name": "Commit",
-          "value": "$CI_COMMIT_SHORT_SHA",
-          "inline": true
-        },
-		 		{
-          "name": "timestamp",
-          "value": "$TIMESTAMP",
-          "inline": false
-        }
-        
-   ]
-}'
+		"username": "",
+		"avatar_url": "https://gitlab.com/favicon.png",
+		"embeds": [ {
+			"color": '$EMBED_COLOR',
+			"author": {
+			"name": "Pipeline #'"$CI_PIPELINE_IID"' '"$STATUS_MESSAGE"' - '"$CI_PROJECT_PATH_SLUG"'",
+			"url": "'"$CI_PIPELINE_URL"'",
+			"icon_url": "https://gitlab.com/favicon.png"
+			},
+			"title": "'"$COMMIT_SUBJECT"'",
+			"url": "'"$URL"'",
+			"description": "'"${COMMIT_MESSAGE//$'\n'/ }"\\n\\n"$CREDITS"'",
+			"fields": [
+			{
+				"name": "Commit",
+				"value": "'"[\`$CI_COMMIT_SHORT_SHA\`]($CI_PROJECT_URL/commit/$CI_COMMIT_SHA)"'",
+				"inline": true
+			},
+			{
+				"name": "Branch",
+				"value": "'"[\`$CI_COMMIT_REF_NAME\`]($CI_PROJECT_URL/tree/$CI_COMMIT_REF_NAME)"'",
+				"inline": true
+			},
+			{
+				"name": "Artifacts",
+				"value": "'"[\`$CI_JOB_ID\`]($ARTIFACT_URL)"'",
+				"inline": true
+			}
+			],
+			"timestamp": "'"$TIMESTAMP"'"
+		} ]
+	}'
 fi
 
 for ARG in "$@"; do
