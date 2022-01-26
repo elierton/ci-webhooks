@@ -60,7 +60,7 @@ if [ -z $LINK_ARTIFACT ] || [ $LINK_ARTIFACT = false ] ; then
         "url": "'"$CI_PIPELINE_URL"'",
         "icon_url": "https://gitlab.com/favicon.png"
       },
-      "title": "'"$CI_JOB_NAME"' #'"$CI_PIPELINE_ID"' '"$STATUS_MESSAGE"',
+      "title": "'"$CI_JOB_NAME"' #'"$CI_PIPELINE_ID"' '"$STATUS_MESSAGE"'",
       "url": "'"$CI_JOB_URL"'",
       "description": "'"$COMMIT_SUBJECT"'",
       "fields": [
@@ -89,7 +89,7 @@ else
         "url": "'"$CI_PIPELINE_URL"'",
         "icon_url": "https://gitlab.com/favicon.png"
       },
-      "title": "'"$CI_JOB_NAME"' #'"$CI_PIPELINE_ID"' '"$STATUS_MESSAGE"',
+      "title": "'"$CI_JOB_NAME"' #'"$CI_PIPELINE_ID"' '"$STATUS_MESSAGE"'",
       "url": "'"$CI_JOB_URL"'",
       "description": "'"$COMMIT_SUBJECT"'",
       "fields": [
