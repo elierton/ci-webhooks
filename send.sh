@@ -57,8 +57,8 @@ if [ -z $LINK_ARTIFACT ] || [ $LINK_ARTIFACT = false ] ; then
       "color": '$EMBED_COLOR',
       "author": {
         "name": "'"$GITLAB_USER_NAME"'",
-        "url": "'"($CI_PAGES_DOMAIN/$GITLAB_USER_LOGIN)"'",
-        "icon_url": ""
+        "url": "'"$CI_PIPELINE_URL"'",
+        "icon_url": "https://gitlab.com/favicon.png"
       },
       "title": "'"$CI_JOB_NAME"' #'"$CI_PIPELINE_ID"' '"$STATUS_MESSAGE"'",
       "url": "'"$CI_JOB_URL"'",
@@ -76,8 +76,9 @@ if [ -z $LINK_ARTIFACT ] || [ $LINK_ARTIFACT = false ] ; then
         }
         ],
         "timestamp": "'"$TIMESTAMP"'"
-      } ]
-    }'
+      } 
+    ]
+  }'
 else
 	WEBHOOK_DATA='{
     "username": "",
@@ -86,8 +87,8 @@ else
       "color": '$EMBED_COLOR',
       "author": {
         "name": "'"$GITLAB_USER_NAME"'",
-        "url": "'"($CI_PAGES_DOMAIN/$GITLAB_USER_LOGIN)"'",
-        "icon_url": ""
+        "url": "'"$CI_PIPELINE_URL"'",
+        "icon_url": "https://gitlab.com/favicon.png"
       },
       "title": "'"$CI_JOB_NAME"' #'"$CI_PIPELINE_ID"' '"$STATUS_MESSAGE"'",
       "url": "'"$CI_JOB_URL"'",
