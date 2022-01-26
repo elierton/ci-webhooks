@@ -62,7 +62,7 @@ if [ -z $LINK_ARTIFACT ] || [ $LINK_ARTIFACT = false ] ; then
       },
       "title": "'"$COMMIT_SUBJECT"'",
       "url": "'"$URL"'",
-      "description": "'"${COMMIT_MESSAGE//$'\n'/ }"\\n\\n"$CREDITS"'",
+      "description": "Pipeline #'"$CI_PIPELINE_IID"' '"$STATUS_MESSAGE"' - '"$CI_PROJECT_PATH_SLUG"'",
       "fields": [
         {
           "name": "Branch",
