@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 set -x
 set -e
@@ -56,9 +56,9 @@ if [ -z $LINK_ARTIFACT ] || [ $LINK_ARTIFACT = false ] ; then
     "embeds": [ {
       "color": '$EMBED_COLOR',
       "author": {
-        "name": "'"$GITLAB_USER_NAME"'",
+        "name": "'"$GITLAB_USER_NAME"'('"$GITLAB_USER_LOGIN"')",
         "url": "'"$CI_PIPELINE_URL"'",
-        "icon_url": "https://gitlab.com/favicon.png"
+        "icon_url": "https://gitlab.com/avatar.png"
       },
       "title": "'"$CI_JOB_NAME"' #'"$CI_PIPELINE_ID"' '"$STATUS_MESSAGE"'",
       "url": "'"$CI_JOB_URL"'",
@@ -75,7 +75,7 @@ if [ -z $LINK_ARTIFACT ] || [ $LINK_ARTIFACT = false ] ; then
           "inline": true
         }
         ],
-        "timestamp": "'"$TIMESTAMP"'"
+        "timestamp": "'"$CI_PROJECT_NAME"' | '"$TIMESTAMP"'"
       } ]
     }'
 else
@@ -85,7 +85,7 @@ else
     "embeds": [ {
       "color": '$EMBED_COLOR',
       "author": {
-        "name": "'"$GITLAB_USER_NAME"'",
+        "name": "'"$GITLAB_USER_NAME"'('"$GITLAB_USER_LOGIN"')",
         "url": "'"$CI_PIPELINE_URL"'",
         "icon_url": "https://gitlab.com/favicon.png"
       },
@@ -109,7 +109,7 @@ else
 				"inline": true
 			  }
 			],
-			"timestamp": "'"$TIMESTAMP"'"
+			"timestamp": "'"$CI_PROJECT_NAME"' | '"$TIMESTAMP"'"
 		} ]
 	}'
 fi
