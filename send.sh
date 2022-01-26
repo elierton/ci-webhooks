@@ -56,7 +56,7 @@ if [ -z $LINK_ARTIFACT ] || [ $LINK_ARTIFACT = false ] ; then
     "embeds": [ {
       "color": '$EMBED_COLOR',
       "author": {
-        "name": "Pipeline #'"$CI_PIPELINE_IID"' '"$STATUS_MESSAGE"' - '"$CI_PROJECT_PATH_SLUG"'",
+        "name": ""'"$GITLAB_USER_NAME"'"",
         "url": "'"$CI_PIPELINE_URL"'",
         "icon_url": "https://gitlab.com/favicon.png"
       },
@@ -71,7 +71,7 @@ if [ -z $LINK_ARTIFACT ] || [ $LINK_ARTIFACT = false ] ; then
         },
         {
           "name": "Commit",
-          "value": "'"[\`$CI_COMMIT_SHORT_SHA\`]($CI_PROJECT_URL/commit/$CI_COMMIT_SHA)"'",
+          "value": "'"[\`$CI_COMMIT_SHORT_SHA\`]($CI_PROJECT_URL/commit/$CI_COMMIT_DESCRIPTION)"'",
           "inline": true
         }
         ],
@@ -80,12 +80,12 @@ if [ -z $LINK_ARTIFACT ] || [ $LINK_ARTIFACT = false ] ; then
     }'
 else
 	WEBHOOK_DATA='{
-		"username": "",
+		"username": "'"$GITLAB_USER_NAME"'",
 		"avatar_url": "https://gitlab.com/favicon.png",
 		"embeds": [ {
 			"color": '$EMBED_COLOR',
 			"author": {
-			"name": "Pipeline #'"$CI_PIPELINE_IID"' '"$STATUS_MESSAGE"' - '"$CI_PROJECT_PATH_SLUG"'",
+			"name": "'",
 			"url": "'"$CI_PIPELINE_URL"'",
 			"icon_url": "https://gitlab.com/favicon.png"
 			},
