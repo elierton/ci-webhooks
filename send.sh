@@ -51,7 +51,7 @@ TIMESTAMP=$(date --utc +%FT%TZ)
 
 if [ -z $LINK_ARTIFACT ] || [ $LINK_ARTIFACT = false ] ; then
   WEBHOOK_DATA='{
-    "username": "'"$GITLAB_USER_NAME"'",
+    "username": "",
     "avatar_url": "https://gitlab.com/favicon.png",
     "embeds": [ {
       "color": '$EMBED_COLOR',
@@ -60,9 +60,9 @@ if [ -z $LINK_ARTIFACT ] || [ $LINK_ARTIFACT = false ] ; then
         "url": "'"$CI_PIPELINE_URL"'",
         "icon_url": "https://gitlab.com/favicon.png"
       },
-      "title": "'"$COMMIT_SUBJECT"'",
-      "url": "'"$URL"'",
-      "description": "'"$CI_JOB_NAME"' #'"$CI_PIPELINE_ID"' '"$STATUS_MESSAGE"' - '"$CI_PROJECT_PATH_SLUG"'",
+      "title": "'"$CI_JOB_NAME"' #'"$CI_PIPELINE_ID"' '"$STATUS_MESSAGE"',
+      "url": "'"$CI_JOB_URL"'",
+      "description": "'"$COMMIT_SUBJECT"'",
       "fields": [
         {
           "name": "Branch",
@@ -80,7 +80,7 @@ if [ -z $LINK_ARTIFACT ] || [ $LINK_ARTIFACT = false ] ; then
     }'
 else
 	WEBHOOK_DATA='{
-    "username": "'"$GITLAB_USER_NAME"'",
+    "username": "",
     "avatar_url": "https://gitlab.com/favicon.png",
     "embeds": [ {
       "color": '$EMBED_COLOR',
@@ -89,9 +89,9 @@ else
         "url": "'"$CI_PIPELINE_URL"'",
         "icon_url": "https://gitlab.com/favicon.png"
       },
-      "title": "'"$COMMIT_SUBJECT"'",
-      "url": "'"$URL"'",
-      "description": "'"$CI_JOB_NAME"' #'"$CI_PIPELINE_ID"' '"$STATUS_MESSAGE"' - '"$CI_PROJECT_PATH_SLUG"'",
+      "title": "'"$CI_JOB_NAME"' #'"$CI_PIPELINE_ID"' '"$STATUS_MESSAGE"',
+      "url": "'"$CI_JOB_URL"'",
+      "description": "'"$COMMIT_SUBJECT"'",
       "fields": [
         {
           "name": "Branch",
