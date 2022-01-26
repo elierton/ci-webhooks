@@ -57,7 +57,7 @@ if [ -z $LINK_ARTIFACT ] || [ $LINK_ARTIFACT = false ] ; then
       "color": '$EMBED_COLOR',
       "author": {
         "name": "'"$GITLAB_USER_NAME"'",
-        "url": "'"$CI_PIPELINE_URL"'",
+        "url": "'"($CI_PAGES_DOMAIN/$GITLAB_USER_LOGIN)"'",
         "icon_url": ""
       },
       "title": "'"$CI_JOB_NAME"' #'"$CI_PIPELINE_ID"' '"$STATUS_MESSAGE"'",
@@ -86,8 +86,8 @@ else
       "color": '$EMBED_COLOR',
       "author": {
         "name": "'"$GITLAB_USER_NAME"'",
-        "url": "'"$CI_PIPELINE_URL"'",
-        "icon_url": "https://gitlab.com/favicon.png"
+        "url": "'"($CI_PAGES_DOMAIN/$GITLAB_USER_LOGIN)"'",
+        "icon_url": ""
       },
       "title": "'"$CI_JOB_NAME"' #'"$CI_PIPELINE_ID"' '"$STATUS_MESSAGE"'",
       "url": "'"$CI_JOB_URL"'",
