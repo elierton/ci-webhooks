@@ -56,7 +56,7 @@ if [ -z $LINK_ARTIFACT ] || [ $LINK_ARTIFACT = false ] ; then
     "embeds": [ {
       "color": '$EMBED_COLOR',
       "author": {
-        "name": "'"$GITLAB_USER_NAME"'('"$GITLAB_USER_LOGIN"')",
+        "name": "'"$GITLAB_USER_NAME"'",
         "url": "'"$CI_PIPELINE_URL"'",
         "icon_url": "https://gitlab.com/favicon.png"
       },
@@ -71,11 +71,11 @@ if [ -z $LINK_ARTIFACT ] || [ $LINK_ARTIFACT = false ] ; then
         },
         {
           "name": "Commit",
-          "value": "'"[\`$CI_COMMIT_SHORT_SHA\`]($CI_PROJECT_URL/commit/$CI_COMMIT_DESCRIPTION)"'",
+          "value": "'"[\`$CI_COMMIT_SHORT_SHA\`]($CI_PROJECT_URL/commit/$CI_COMMIT_SHA)"'",
           "inline": true
         }
         ],
-        "timestamp": "'"$CI_PROJECT_NAME"' | '"$TIMESTAMP"'"
+        "timestamp": "'"$TIMESTAMP"'"
       } ]
     }'
 else
@@ -85,7 +85,7 @@ else
     "embeds": [ {
       "color": '$EMBED_COLOR',
       "author": {
-        "name": "'"$GITLAB_USER_NAME"'('"$GITLAB_USER_LOGIN"')",
+        "name": "'"$GITLAB_USER_NAME"'",
         "url": "'"$CI_PIPELINE_URL"'",
         "icon_url": "https://gitlab.com/favicon.png"
       },
@@ -100,7 +100,7 @@ else
         },
         {
           "name": "Commit",
-          "value": "'"[\`$CI_COMMIT_SHORT_SHA\`]($CI_PROJECT_URL/commit/$CI_COMMIT_DESCRIPTION)"'",
+          "value": "'"[\`$CI_COMMIT_SHORT_SHA\`]($CI_PROJECT_URL/commit/$CI_COMMIT_SHA)"'",
           "inline": true
         },
 		  	{
@@ -109,7 +109,7 @@ else
 				"inline": true
 			  }
 			],
-			"timestamp": "'"$CI_PROJECT_NAME"' | '"$TIMESTAMP"'"
+			"timestamp": "'"$TIMESTAMP"'"
 		} ]
 	}'
 fi
