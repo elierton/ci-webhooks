@@ -62,7 +62,7 @@ if [ -z $LINK_ARTIFACT ] || [ $LINK_ARTIFACT = false ] ; then
       },
       "title": "'"$CI_JOB_NAME"' #'"$CI_PIPELINE_ID"' '"$STATUS_MESSAGE"'",
       "url": "'"$CI_JOB_URL"'",
-      "description": "'"$COMMIT_SUBJECT"'",
+      "description": "",
       "fields": [
         {
           "name": "Branch",
@@ -71,11 +71,11 @@ if [ -z $LINK_ARTIFACT ] || [ $LINK_ARTIFACT = false ] ; then
         },
         {
           "name": "Commit",
-          "value": "'"[\`$CI_COMMIT_SHORT_SHA\`]($CI_PROJECT_URL/commit/$CI_COMMIT_DESCRIPTION)"'",
+          "value": "'"[\`$COMMIT_SUBJECT\`]($CI_PROJECT_URL/commit/$COMMIT_SUBJECT)"'",
           "inline": true
         }
         ],
-        "timestamp": "'"$TIMESTAMP"'"
+        "timestamp": "'"$CI_PROJECT_NAME"'|'"$TIMESTAMP"'"
       } ]
     }'
 else
@@ -100,7 +100,7 @@ else
         },
         {
           "name": "Commit",
-          "value": "'"[\`$CI_COMMIT_SHORT_SHA\`]($CI_PROJECT_URL/commit/$CI_COMMIT_DESCRIPTION)"'",
+          "value": "'"[\`$COMMIT_SUBJECT\`]($CI_PROJECT_URL/commit/$COMMIT_SUBJECT)"'",
           "inline": true
         },
 		  	{
@@ -109,7 +109,7 @@ else
 				"inline": true
 			  }
 			],
-			"timestamp": "'"$TIMESTAMP"'"
+			"timestamp": "'"$CI_PROJECT_NAME"'|'"$TIMESTAMP"'"
 		} ]
 	}'
 fi
