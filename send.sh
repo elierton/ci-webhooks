@@ -51,7 +51,7 @@ TIMESTAMP=$(date --utc +%FT%TZ)
 
 if [ -z $LINK_ARTIFACT ] || [ $LINK_ARTIFACT = false ] ; then
   WEBHOOK_DATA='{
-    "username": "",
+    "username": "'"$GITLAB_USER_NAME"'",
     "avatar_url": "https://gitlab.com/favicon.png",
     "embeds": [ {
       "color": '$EMBED_COLOR',
@@ -85,7 +85,7 @@ else
 		"embeds": [ {
 			"color": '$EMBED_COLOR',
 			"author": {
-			"name": "'",
+			"name": "",
 			"url": "'"$CI_PIPELINE_URL"'",
 			"icon_url": "https://gitlab.com/favicon.png"
 			},
