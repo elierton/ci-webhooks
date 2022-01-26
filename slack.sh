@@ -55,31 +55,31 @@ if [ -z $LINK_ARTIFACT ] || [ $LINK_ARTIFACT = false ] ; then
     "icon_url": "https://gitlab.com/favicon.png",
     "attachments": [ {
 			
-      "color":'$EMBED_COLOR',
+      "color":"#36a64f",
       "fallback": {
-        "text": "'"$GITLAB_USER_NAME"'",
+        "text": "$GITLAB_USER_NAME",
 				"icon_url": "https://gitlab.com/favicon.png"
 			},
-      "title": "'"$GITLAB_USER_NAME"'",
-			"text": "'"$CI_JOB_NAME"' #'"$CI_PIPELINE_ID"' '"$STATUS_MESSAGE"'",
+      "title": "$GITLAB_USER_NAME",
+			"text": "$CI_JOB_NAME #$CI_PIPELINE_ID $STATUS_MESSAGE",
       "fields": [
         {
           "title": "Branch",
-          "value": "'"[\`$CI_COMMIT_REF_NAME\`]($CI_PROJECT_URL/tree/$CI_COMMIT_REF_NAME)"'",
+          "value": "[$CI_COMMIT_REF_NAME]($CI_PROJECT_URL/tree/$CI_COMMIT_REF_NAME)",
           "short": true
         },
         {
           "title": "Commit",
-          "value": "'"[\`$CI_COMMIT_SHORT_SHA\`]($CI_PROJECT_URL/commit/$CI_COMMIT_SHA)"'",
+          "value": "[$CI_COMMIT_SHORT_SHA]($CI_PROJECT_URL/commit/$CI_COMMIT_SHA)",
           "short": true
         },
 				{
           "title": "",
-          "value": ""'"$CI_PROJECT_NAME"'" | "'"$TIMESTAMP"'"",
+          "value": "$CI_PROJECT_NAME | $TIMESTAMP",
           "short": false
 				}
 				],
-        "timestamp": "'"$TIMESTAMP"'"
+        "timestamp": "$TIMESTAMP"
       } ]
     }'
 else
@@ -88,17 +88,17 @@ else
     "icon_url": "https://gitlab.com/favicon.png",
     "attachments": [ {
 			
-      "color":'$EMBED_COLOR',
+      "color":"#36a64f",
       "fallback": {
-        "text": "'"$GITLAB_USER_NAME"'",
+        "text": "$GITLAB_USER_NAME",
 				"icon_url": "https://gitlab.com/favicon.png"
 			},
-      "title": "'"$GITLAB_USER_NAME"'",
-			"text": "'"$CI_JOB_NAME"' #'"$CI_PIPELINE_ID"' '"$STATUS_MESSAGE"'",
+      "title": "$GITLAB_USER_NAME",
+			"text": "$CI_JOB_NAME #$CI_PIPELINE_ID $STATUS_MESSAGE",
       "fields": [
         {
           "title": "Branch",
-          "value": "'"[\`$CI_COMMIT_REF_NAME\`]($CI_PROJECT_URL/tree/$CI_COMMIT_REF_NAME)"'",
+          "value": "[$CI_COMMIT_REF_NAME]($CI_PROJECT_URL/tree/$CI_COMMIT_REF_NAME)",
           "short": true
         },
         {
@@ -108,16 +108,16 @@ else
         },
 				{
 				"title": "Artifacts",
-				"value": "'"[\`$CI_JOB_ID\`]($ARTIFACT_URL)"'",
+				"value": "[$CI_JOB_ID]($ARTIFACT_URL)",
 				"short": true
 			  },
         {
           "title": "",
-          "value": ""'"$CI_PROJECT_NAME"'" | "'"$TIMESTAMP"'"",
+          "value": "$CI_PROJECT_NAME | $TIMESTAMP",
           "short": false
 				},
 			],
-			"timestamp": "'"$TIMESTAMP"'"
+			"timestamp": "$TIMESTAMP"
 		} ]
 	}'
 fi
