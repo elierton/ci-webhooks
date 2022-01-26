@@ -58,7 +58,7 @@ if [ -z $LINK_ARTIFACT ] || [ $LINK_ARTIFACT = false ] ; then
       "author": {
         "name": "'"$GITLAB_USER_NAME"'",
         "url": "'"$CI_PIPELINE_URL"'",
-        "icon_url": "https://gitlab.com/favicon.png"
+        "icon_url": ""
       },
       "title": "'"$CI_JOB_NAME"' #'"$CI_PIPELINE_ID"' '"$STATUS_MESSAGE"'",
       "url": "'"$CI_JOB_URL"'",

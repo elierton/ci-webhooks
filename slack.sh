@@ -52,25 +52,28 @@ TIMESTAMP=$(date --utc +%FT%TZ)
 if [ -z $LINK_ARTIFACT ] || [ $LINK_ARTIFACT = false ] ; then
   WEBHOOK_DATA='{
     "username": "",
-    "icon_url": "https://gitlab.com/favicon.png",
+		"icon_url": "https://gitlab.com/favicon.png",
+		"unfurl_links": true,
     "attachments": [ {
-			
-      "color":"#36a64f",
+			"color":"#36a64f",
       "fallback": {
-        "text": "'$GITLAB_USER_NAME'",
-				"icon_url": "https://gitlab.com/favicon.png"
+				
 			},
       "title": "'$GITLAB_USER_NAME'",
-			"text": "'$CI_JOB_NAME' #'$CI_PIPELINE_ID' '$STATUS_MESSAGE'",
-      "fields": [
+			 "fields": [
+				{
+          "title": "",
+          "value": "'$CI_JOB_NAME' #'$CI_PIPELINE_ID' '$STATUS_MESSAGE'",
+          "short": false
+        },
         {
           "title": "Branch",
-          "value": "['$CI_COMMIT_REF_NAME']('$CI_PROJECT_URL'/tree/'$CI_COMMIT_REF_NAME')",
+          "value": "'$CI_COMMIT_REF_NAME''$CI_PROJECT_URL'/tree/'$CI_COMMIT_REF_NAME'",
           "short": true
         },
         {
           "title": "Commit",
-          "value": "['$CI_COMMIT_SHORT_SHA']('$CI_PROJECT_URL'/commit/'$CI_COMMIT_SHA')",
+          "value": "'$CI_COMMIT_SHORT_SHA''$CI_PROJECT_URL'/commit/'$CI_COMMIT_SHA'",
           "short": true
         },
 				{
@@ -78,37 +81,40 @@ if [ -z $LINK_ARTIFACT ] || [ $LINK_ARTIFACT = false ] ; then
           "value": "'$CI_PROJECT_NAME' | '$TIMESTAMP'",
           "short": false
 				}
-				],
-        "timestamp": "'$TIMESTAMP'"
-      } ]
-    }'
+				]
+      } 
+    ]
+  }'
 else
 	WEBHOOK_DATA='{
     "username": "",
-    "icon_url": "https://gitlab.com/favicon.png",
+		"icon_url": "https://gitlab.com/favicon.png",
+		"unfurl_links": true,
     "attachments": [ {
-			
-      "color":"#36a64f",
+			"color":"#36a64f",
       "fallback": {
-        "text": "'$GITLAB_USER_NAME'",
-				"icon_url": "https://gitlab.com/favicon.png"
+				
 			},
       "title": "'$GITLAB_USER_NAME'",
-			"text": "'$CI_JOB_NAME' #'$CI_PIPELINE_ID' '$STATUS_MESSAGE'",
-      "fields": [
+			 "fields": [
+				{
+          "title": "",
+          "value": "'$CI_JOB_NAME' #'$CI_PIPELINE_ID' '$STATUS_MESSAGE'",
+          "short": false
+        },
         {
           "title": "Branch",
-          "value": "['$CI_COMMIT_REF_NAME']('$CI_PROJECT_URL'/tree/'$CI_COMMIT_REF_NAME')",
+          "value": "'$CI_COMMIT_REF_NAME''$CI_PROJECT_URL'/tree/'$CI_COMMIT_REF_NAME'",
           "short": true
         },
         {
           "title": "Commit",
-          "value": "['$CI_COMMIT_SHORT_SHA']('$CI_PROJECT_URL'/commit/'$CI_COMMIT_SHA')",
+          "value": "'$CI_COMMIT_SHORT_SHA''$CI_PROJECT_URL'/commit/'$CI_COMMIT_SHA'",
           "short": true
         },
 				{
 				"title": "Artifacts",
-				"value": "['$CI_JOB_ID']('$ARTIFACT_URL')",
+				"value": "'$CI_JOB_ID''$ARTIFACT_URL'",
 				"short": true
 			  },
         {
@@ -116,10 +122,10 @@ else
           "value": "'$CI_PROJECT_NAME' | '$TIMESTAMP'",
           "short": false
 				}
-			],
-			"timestamp": "'$TIMESTAMP'"
-		} ]
-	}'
+			]
+		} 
+  ]
+}'
 fi
 
 for ARG in "$@"; do
