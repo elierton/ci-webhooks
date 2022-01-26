@@ -80,34 +80,34 @@ if [ -z $LINK_ARTIFACT ] || [ $LINK_ARTIFACT = false ] ; then
     }'
 else
 	WEBHOOK_DATA='{
-		"username": "'"$GITLAB_USER_NAME"'",
-		"avatar_url": "https://gitlab.com/favicon.png",
-		"embeds": [ {
-			"color": '$EMBED_COLOR',
-			"author": {
-			"name": "",
-			"url": "'"$CI_PIPELINE_URL"'",
-			"icon_url": "https://gitlab.com/favicon.png"
-			},
-			"title": "'"$COMMIT_SUBJECT"'",
-			"url": "'"$URL"'",
-			"description": "'"${COMMIT_MESSAGE//$'\n'/ }"\\n\\n"$CREDITS"'",
-			"fields": [
-			{
-				"name": "Commit",
-				"value": "'"[\`$CI_COMMIT_SHORT_SHA\`]($CI_PROJECT_URL/commit/$CI_COMMIT_SHA)"'",
-				"inline": true
-			},
-			{
-				"name": "Branch",
-				"value": "'"[\`$CI_COMMIT_REF_NAME\`]($CI_PROJECT_URL/tree/$CI_COMMIT_REF_NAME)"'",
-				"inline": true
-			},
-			{
+    "username": "'"$GITLAB_USER_NAME"'",
+    "avatar_url": "https://gitlab.com/favicon.png",
+    "embeds": [ {
+      "color": '$EMBED_COLOR',
+      "author": {
+        "name": "'"$GITLAB_USER_NAME"'",
+        "url": "'"$CI_PIPELINE_URL"'",
+        "icon_url": "https://gitlab.com/favicon.png"
+      },
+      "title": "'"$COMMIT_SUBJECT"'",
+      "url": "'"$URL"'",
+      "description": "'"$CI_JOB_NAME"' #'"$CI_PIPELINE_ID"' '"$STATUS_MESSAGE"' - '"$CI_PROJECT_PATH_SLUG"'",
+      "fields": [
+        {
+          "name": "Branch",
+          "value": "'"[\`$CI_COMMIT_REF_NAME\`]($CI_PROJECT_URL/tree/$CI_COMMIT_REF_NAME)"'",
+          "inline": true
+        },
+        {
+          "name": "Commit",
+          "value": "'"[\`$CI_COMMIT_SHORT_SHA\`]($CI_PROJECT_URL/commit/$CI_COMMIT_DESCRIPTION)"'",
+          "inline": true
+        },
+		  	{
 				"name": "Artifacts",
 				"value": "'"[\`$CI_JOB_ID\`]($ARTIFACT_URL)"'",
 				"inline": true
-			}
+			  }
 			],
 			"timestamp": "'"$TIMESTAMP"'"
 		} ]
