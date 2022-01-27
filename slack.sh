@@ -6,19 +6,19 @@ set -e
 case $1 in
   "success" )
     EMBED_COLOR=3066993
-    STATUS_MESSAGE="Passed"
+    STATUS_MESSAGE="has Passed"
     ARTIFACT_URL="$CI_JOB_URL/artifacts/download"
     ;;
 
   "failure" )
     EMBED_COLOR=15158332
-    STATUS_MESSAGE="Failed"
+    STATUS_MESSAGE="has Failed"
     ARTIFACT_URL="Not available"
     ;;
 
   * )
     EMBED_COLOR=3066993
-    STATUS_MESSAGE="Passed"
+    STATUS_MESSAGE="has Passed"
     ARTIFACT_URL="$CI_JOB_URL/artifacts/download"
     ;;
 esac
