@@ -56,7 +56,7 @@ if [ -z $LINK_ARTIFACT ] || [ $LINK_ARTIFACT = false ] ; then
     "embeds": [ {
       "color": '$EMBED_COLOR',
       "author": {
-        "name": "'"$GITLAB_USER_NAME"'",
+        "name": "'"$GITLAB_USER_NAME($GITLAB_USER_LOGIN)"'",
         "url": "'"$CI_JOB_URL"'",
         "icon_url": "https://gitlab.com/favicon.png"
       },
