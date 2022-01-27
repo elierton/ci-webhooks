@@ -34,7 +34,6 @@ COMMITTER_NAME="$(git log -1 "$CI_COMMIT_SHA" --pretty="%cN")"
 COMMIT_SUBJECT="$(git log -1 "$CI_COMMIT_SHA" --pretty="%s")"
 COMMIT_MESSAGE="$(git log -1 "$CI_COMMIT_SHA" --pretty="%b")" | sed -E ':a;N;$!ba;s/\r{0,1}\n/\\n/g'
 
-
 if [ "$AUTHOR_NAME" == "$COMMITTER_NAME" ]; then
   CREDITS="$AUTHOR_NAME authored & committed"
 else
@@ -49,6 +48,7 @@ fi
 
 TIMESTAMP=$(date --utc +%FT%TZ)
 
+
 if [ -z $LINK_ARTIFACT ] || [ $LINK_ARTIFACT = false ] ; then
   WEBHOOK_DATA='{
     "attachments": [
@@ -58,7 +58,7 @@ if [ -z $LINK_ARTIFACT ] || [ $LINK_ARTIFACT = false ] ; then
             "pretext": "",
 					  "author_name": "'$GITLAB_USER_NAME'('$GITLAB_USER_LOGIN')",
             "author_link": "https://'$CI_SERVER_HOST'/'$GITLAB_USER_LOGIN'",
-            "author_icon": "https://gitlab.com/favicon.png",
+            "author_icon": "https://'$CI_SERVER_HOST'/uploads/-/system/user/avatar/'$GITLAB_USER_ID'/avatar.png",
             "title": "'$CI_JOB_NAME' #'$CI_PIPELINE_ID' '$STATUS_MESSAGE'",
             "title_link": "'$CI_JOB_URL'",
             "text": "",
@@ -91,7 +91,7 @@ else
             "pretext": "",
 					  "author_name": "'$GITLAB_USER_NAME'('$GITLAB_USER_LOGIN')",
             "author_link": "https://'$CI_SERVER_HOST'/'$GITLAB_USER_LOGIN'",
-            "author_icon": "https://gitlab.com/favicon.png",
+            "author_icon": "https://'$CI_SERVER_HOST'/uploads/-/system/user/avatar/'$GITLAB_USER_ID'/avatar.png",
             "title": "'$CI_JOB_NAME' #'$CI_PIPELINE_ID' '$STATUS_MESSAGE'",
             "title_link": "'$CI_JOB_URL'",
             "text": "",
