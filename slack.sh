@@ -73,7 +73,7 @@ if [ -z $LINK_ARTIFACT ] || [ $LINK_ARTIFACT = false ] ; then
         },
         {
           "title": "Commit",
-          "value": "<'$CI_PROJECT_URL'/commit/'$CI_COMMIT_SHA'|'$CI_COMMIT_SHORT_SHA'>",
+          "value": "<'$CI_PROJECT_URL'/commit/'$CI_COMMIT_SHA'|'$CI_COMMIT_MESSAGE'>",
           "short": true
         },
 				{
@@ -95,26 +95,26 @@ else
       "fallback": {
 				
 			},
-      "title": "'$GITLAB_USER_NAME'",
+      "title": "<'$CI_SERVER_HOST'/'$GITLAB_USER_LOGIN'|'$GITLAB_USER_NAME'('$GITLAB_USER_LOGIN')>",
 			 "fields": [
 				{
           "title": "",
-          "value": "'$CI_JOB_NAME' #'$CI_PIPELINE_ID' '$STATUS_MESSAGE'",
+          "value": "<'$CI_JOB_URL'|'$CI_JOB_NAME' #'$CI_PIPELINE_ID' '$STATUS_MESSAGE'>",
           "short": false
         },
         {
           "title": "Branch",
-          "value": "['$CI_COMMIT_REF_NAME'] '$CI_PROJECT_URL'/tree/'$CI_COMMIT_REF_NAME'",
+          "value": "<'$CI_PROJECT_URL'/tree/'$CI_COMMIT_REF_NAME'|'$CI_COMMIT_REF_NAME'>",
           "short": true
         },
         {
           "title": "Commit",
-          "value": "['$CI_COMMIT_SHORT_SHA'] '$CI_PROJECT_URL'/commit/'$CI_COMMIT_SHA'",
+          "value": "<'$CI_PROJECT_URL'/commit/'$CI_COMMIT_SHA'|'$CI_COMMIT_MESSAGE'>",
           "short": true
         },
 				{
 				"title": "Artifacts",
-				"value": "'$CI_JOB_ID' '$ARTIFACT_URL'",
+				"value": "<'$ARTIFACT_URL'|'$CI_JOB_ID'>",
 				"short": true
 			  },
         {
