@@ -73,7 +73,7 @@ if [ -z $LINK_ARTIFACT ] || [ $LINK_ARTIFACT = false ] ; then
         },
         {
           "title": "Commit",
-          "value": "<'$CI_PROJECT_URL'/commit/'$CI_COMMIT_SHA'|'$CI_COMMIT_MESSAGE'>",
+          "value": "<'$CI_PROJECT_URL'/commit/'$CI_COMMIT_SHA'|'$CI_COMMIT_SHORT_SHA'>",
           "short": true
         },
 				{
@@ -109,7 +109,7 @@ else
         },
         {
           "title": "Commit",
-          "value": "<'$CI_PROJECT_URL'/commit/'$CI_COMMIT_SHA'|'$CI_COMMIT_MESSAGE'>",
+          "value": "<'$CI_PROJECT_URL'/commit/'$CI_COMMIT_SHA'|'$CI_COMMIT_SHORT_SHA'>",
           "short": true
         },
 				{
