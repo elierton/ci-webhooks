@@ -48,6 +48,7 @@ else
 fi
 
 TIMESTAMP=$(date --utc +%FT%TZ)
+AVATAR_URL=`curl https://gitlab.cloudplusplus.nl/api/v4/avatar\?email\=elierton@cloudplusplus.nl 2>/dev/null | awk -F'"' '{print $4}'`
 
 if [ -z $LINK_ARTIFACT ] || [ $LINK_ARTIFACT = false ] ; then
   WEBHOOK_DATA='{
@@ -58,7 +59,7 @@ if [ -z $LINK_ARTIFACT ] || [ $LINK_ARTIFACT = false ] ; then
       "author": {
         "name": "'"$GITLAB_USER_NAME($GITLAB_USER_LOGIN)"'",
         "url": "https://'"$CI_SERVER_HOST/$GITLAB_USER_LOGIN"'",
-        "icon_url": "https://'"$CI_SERVER_HOST"'/uploads/-/system/user/avatar/'"$GITLAB_USER_ID"'/avatar.png"
+        "icon_url": "'"$AVATAR_URL"'"
       },
       "title": "'"$CI_JOB_NAME"' #'"$CI_PIPELINE_ID"' '"$STATUS_MESSAGE"'",
       "url": "'"$CI_PIPELINE_URL"'",
