@@ -48,7 +48,7 @@ else
 fi
 
 TIMESTAMP=$(date --utc +%FT%TZ)
-AVATAR_URL=`curl https://gitlab.cloudplusplus.nl/api/v4/avatar\?email\=elierton@cloudplusplus.nl 2>/dev/null | awk -F'"' '{print $4}'`
+AVATAR_URL=`curl https://gitlab.cloudplusplus.nl/api/v4/avatar\?email\=$GITLAB_USER_EMAIL 2>/dev/null | awk -F'"' '{print $4}'`
 
 if [ -z $LINK_ARTIFACT ] || [ $LINK_ARTIFACT = false ] ; then
   WEBHOOK_DATA='{
