@@ -4,23 +4,23 @@ set -x
 set -e
 
 case $1 in
-  "success" )
-    EMBED_COLOR=3066993
-    STATUS_MESSAGE="has Passed"
-    ARTIFACT_URL="$CI_JOB_URL/artifacts/download"
-    ;;
+"success")
+  EMBED_COLOR=3066993
+  STATUS_MESSAGE="has Passed"
+  ARTIFACT_URL="$CI_JOB_URL/artifacts/download"
+  ;;
 
-  "failure" )
-    EMBED_COLOR=15158332
-    STATUS_MESSAGE="has Failed"
-    ARTIFACT_URL="Not available"
-    ;;
+"failure")
+  EMBED_COLOR=15158332
+  STATUS_MESSAGE="has Failed"
+  ARTIFACT_URL="Not available"
+  ;;
 
-  * )
-    EMBED_COLOR=3066993
-    STATUS_MESSAGE="has Passed"
-    ARTIFACT_URL="$CI_JOB_URL/artifacts/download"
-    ;;
+*)
+  EMBED_COLOR=3066993
+  STATUS_MESSAGE="has Passed"
+  ARTIFACT_URL="$CI_JOB_URL/artifacts/download"
+  ;;
 esac
 
 shift
@@ -33,7 +33,6 @@ AUTHOR_NAME="$(git log -1 "$CI_COMMIT_SHA" --pretty="%aN")"
 COMMITTER_NAME="$(git log -1 "$CI_COMMIT_SHA" --pretty="%cN")"
 COMMIT_SUBJECT="$(git log -1 "$CI_COMMIT_SHA" --pretty="%s")"
 COMMIT_MESSAGE="$(git log -1 "$CI_COMMIT_SHA" --pretty="%b")" | sed -E ':a;N;$!ba;s/\r{0,1}\n/\\n/g'
-
 
 if [ "$AUTHOR_NAME" == "$COMMITTER_NAME" ]; then
   CREDITS="$AUTHOR_NAME authored & committed"
@@ -48,9 +47,9 @@ else
 fi
 
 TIMESTAMP=$(date --utc +%FT%TZ)
-AVATAR_URL=`curl https://gitlab.cloudplusplus.nl/api/v4/avatar\?email\=$GITLAB_USER_EMAIL 2>/dev/null | awk -F'"' '{print $4}'`
+AVATAR_URL=$(curl https://gitlab.cloudplusplus.nl/api/v4/avatar\?email\=$GITLAB_USER_EMAIL 2>/dev/null | awk -F'"' '{print $4}')
 
-if [ -z $LINK_ARTIFACT ] || [ $LINK_ARTIFACT = false ] ; then
+if [ -z $LINK_ARTIFACT ] || [ $LINK_ARTIFACT = false ]; then
   WEBHOOK_DATA='{
     "username": "",
     "avatar_url": "https://gitlab.com/favicon.png",
@@ -81,7 +80,7 @@ if [ -z $LINK_ARTIFACT ] || [ $LINK_ARTIFACT = false ] ; then
     ]
   }'
 else
-	WEBHOOK_DATA='{
+  WEBHOOK_DATA='{
     "username": "",
     "avatar_url": "https://gitlab.com/favicon.png",
     "embeds": [ {
@@ -117,8 +116,8 @@ else
 fi
 
 for ARG in "$@"; do
-  echo -e "[Webhook]: Sending webhook to Discord...\\n";
+  echo -e "[Webhook]: Sending webhook to Discord...\\n"
 
-  (curl --fail --progress-bar -A "GitLabCI-Webhook" -H Content-Type:application/json -H X-Author:eliertoncosta#5944 -d "$WEBHOOK_DATA" "$ARG" \
-  && echo -e "\\n[Webhook]: Successfully sent the webhook.") || echo -e "\\n[Webhook]: Unable to send webhook."
+  (curl --fail --progress-bar -A "GitLabCI-Webhook" -H Content-Type:application/json -H X-Author:eliertoncosta#5944 -d "$WEBHOOK_DATA" "$ARG" &&
+    echo -e "\\n[Webhook]: Successfully sent the webhook.") || echo -e "\\n[Webhook]: Unable to send webhook."
 done
